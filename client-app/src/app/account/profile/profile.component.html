@@ -1,0 +1,33 @@
+<div class="w3-container">
+    <h1>Profile</h1>
+    <div classs="w3-container" >
+        <form [formGroup]="profileForm" (ngSubmit)="update()">  
+      
+            <label for="email">Email: </label>
+            <input id="email" type="text" formControlName="email">
+          
+            <label for="password">Password </label>
+            <input id="password" type="password" formControlName="password">
+
+            <label for="name">Name: </label>
+            <input id="name" type="text" formControlName="name">
+
+            <label for="city">City: </label>
+            <input id="city" type="text" formControlName="city">
+
+          <label for="state">State: </label>
+          <input id="state" type="text" formControlName="state">
+
+          <label for="address">Address: </label>
+          <input id="address" type="text" formControlName="address">
+
+          <label for="qualification">Qualification: </label>
+          <input id="qualification" type="text" formControlName="qualification">
+
+          <label for="phone">Phone: </label>
+          <input id="phone" type="text" formControlName="phone">
+
+          <button type="submit" [disabled]="!profileForm.valid" class="w3-btn w3-purple">Update</button>
+        </form>
+        </div>
+</div>

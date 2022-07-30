@@ -26,10 +26,18 @@ export class AccountService {
     return this.offline;
   }
 
-  SignOut() {
-    return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['/']);
-    });
+  isLoggedin() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    } else {
+      return false;
+    }
+  }
+  async SignOut() {
+    await this.afAuth.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['/']);
+    this.isLoggedin()
   }
 }

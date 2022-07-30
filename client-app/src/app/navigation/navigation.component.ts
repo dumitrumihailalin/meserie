@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 
 @Component({
@@ -9,10 +10,16 @@ import { AccountService } from '../services/account.service';
 })
 export class NavigationComponent implements OnInit {
 
-
-  constructor(public accountService: AccountService, public afAuth: AngularFireAuth) { }
+  UserId: any;
+  constructor(public accountService: AccountService, public afAuth: AngularFireAuth, public router: Router) { }
 
   ngOnInit(): void {
+    const user = this.accountService.isLoggedin();
+    if (user) {
+      this.UserId = user.uid;
+    } else {
+      this.UserId = false;
+    }
   }
 
   logout() {

@@ -19,7 +19,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     RegisterComponent,
     HomeComponentComponent,
     ProfileComponent,
-    NavigationComponent
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

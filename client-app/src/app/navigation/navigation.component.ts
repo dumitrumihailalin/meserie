@@ -9,9 +9,13 @@ import { AccountService } from '../services/account.service';
 })
 export class NavigationComponent implements OnInit {
 
+
   constructor(public accountService: AccountService, public afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.accountService.SignOut();
+  }
 }

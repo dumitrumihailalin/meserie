@@ -1,0 +1,28 @@
+<div class="w3-container">
+    <h1>Start in cariera</h1>
+    <form [formGroup]="startForm" (ngSubmit)="onSubmit()">
+    
+        <label for="email">Email: </label>
+        <input id="email" type="text" formControlName="email">
+
+        <label for="name">Name: </label>
+        <input id="name" type="text" formControlName="name">
+
+        <label for="city">City: </label>
+        <input id="city" type="text" formControlName="city">
+
+      <label for="state">State: </label>
+      <input id="state" type="text" formControlName="state">
+
+      <label for="address">Address: </label>
+      <input id="address" type="text" formControlName="address">
+
+      <label for="qualification">Qualification: </label>
+      <input id="qualification" type="text" formControlName="qualification">
+
+      <label for="phone">Phone: </label>
+      <input id="phone" type="text" formControlName="phone">
+        <button type="submit" [disabled]="!startForm.valid" class="w3-btn w3-purple">Send</button>
+    </form>
+</div>
+

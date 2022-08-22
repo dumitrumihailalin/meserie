@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "meserie-client-app"
+  },
+  "targets": {
+    "meserie-client-app": {
+      "hosting": {
+        "client-app": [
+          "meserie-client-app"
+        ]
+      }
+    }
   }
 }

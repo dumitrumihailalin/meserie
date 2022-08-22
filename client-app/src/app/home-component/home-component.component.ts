@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponentComponent implements OnInit {
 
+  title = 'meserie';
   constructor() { }
 
   ngOnInit(): void {

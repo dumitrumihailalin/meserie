@@ -11,6 +11,12 @@ import { RegisterComponent } from './account/register/register.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { ProfileComponent } from './account/profile/profile.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { StartComponent } from './start/start.component';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +26,19 @@ import { NavigationComponent } from './navigation/navigation.component';
     HomeComponentComponent,
     ProfileComponent,
     NavigationComponent,
+    StartComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     ReactiveFormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]

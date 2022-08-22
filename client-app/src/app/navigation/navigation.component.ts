@@ -10,15 +10,16 @@ import { AccountService } from '../services/account.service';
 })
 export class NavigationComponent implements OnInit {
 
-  UserId: any;
+  loggedin: boolean = false;
+  currentUser: any;
+  title = 'meserie.eu'
   constructor(public accountService: AccountService, public afAuth: AngularFireAuth, public router: Router) { }
 
   ngOnInit(): void {
-    const user = this.accountService.isLoggedin();
+    const user = this.accountService.getUserId();
+    
     if (user) {
-      this.UserId = user.uid;
-    } else {
-      this.UserId = false;
+      this.currentUser = this.accountService.getUserId();
     }
   }
 

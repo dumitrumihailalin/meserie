@@ -1,19 +1,24 @@
 <div class="w3-container">
     <h1>Profile</h1>
     <div classs="w3-container" >
-        <form [formGroup]="profileForm" (ngSubmit)="update()">  
-      
-            <label for="email">Email: </label>
-            <input id="email" type="text" formControlName="email">
-          
-            <label for="password">Password </label>
-            <input id="password" type="password" formControlName="password">
+        <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">  
+          <div *ngIf="downloadUrl | async; let srcUrl">
+            <img [src]="srcUrl" width="150px" height="150px">
+          </div>
+          <input id="image" type="file" (change)="fileChange($event)">
+          <br>
 
-            <label for="name">Name: </label>
-            <input id="name" type="text" formControlName="name">
+          <label for="email">Email: </label>
+          <input id="email" type="text" formControlName="email">
+        
+          <label for="password">Password </label>
+          <input id="password" type="password" formControlName="password">
 
-            <label for="city">City: </label>
-            <input id="city" type="text" formControlName="city">
+          <label for="name">Name: </label>
+          <input id="name" type="text" formControlName="name">
+
+          <label for="city">City: </label>
+          <input id="city" type="text" formControlName="city">
 
           <label for="state">State: </label>
           <input id="state" type="text" formControlName="state">

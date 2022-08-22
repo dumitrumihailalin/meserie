@@ -1,4 +1,5 @@
 <div classs="w3-container">
+  <h1>Login</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
     <label for="email">Email: </label>
@@ -9,4 +10,4 @@
     <button type="submit" [disabled]="!loginForm.valid" class="w3-btn w3-purple">Send</button>
   </form>
   <a routerLink="/register" class="w3-btn">Register</a>
-  </div>
+</div>

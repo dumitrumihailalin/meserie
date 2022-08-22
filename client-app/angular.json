@@ -94,6 +94,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "client-app:build:production",
+            "firebaseProject": "meserie-client-app",
+            "firebaseHostingSite": "meserie-client-app"
+          }
         }
       }
     }

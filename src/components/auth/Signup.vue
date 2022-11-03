@@ -33,7 +33,9 @@
       data() {
         return {
             email: '',
-            phone: ''
+            phone: '',
+            city: '',
+            name: ''
         }
       },
       methods: {
@@ -41,7 +43,10 @@
             let data = { email: this.email, phone: this.phone}
             const docRef = await addDoc(collection(db, "users"), data);
             console.log("Document written with ID: ", docRef.id);
-
+            this.email = '';
+            this.name = '';
+            this.phone = '';
+            this.city = '';
         }
       }
     }

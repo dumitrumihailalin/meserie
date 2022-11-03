@@ -19,6 +19,8 @@
   import { db }  from '@/firebase/init'
   import { getFirestore } from 'firebase/firestore'
   import { collection, getDocs } from 'firebase/firestore'
+  import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 
     export default {
       name: 'Login',
@@ -30,10 +32,19 @@
       },
       methods: {
         async login() {
-            const querySnapshot = await getDocs(collection(db, 'users'))
-            querySnapshot.forEach((doc) => {
-                console.log(doc.data())
-            })
+          const auth = getAuth();
+              signInWithEmailAndPassword(auth, this.email, this.password)
+              .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user)
+                // ...
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+              });  
         }
       }
     }

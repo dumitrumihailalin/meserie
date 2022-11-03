@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write, update
+    }
+    match /members {
+      allow read, write, update
+    }
+    match /messages/{document=**} {
+      allow read, write, update
+    }
+    match /candidates/{document=**} {
+      allow read, write, update
+    }
+  }
+}

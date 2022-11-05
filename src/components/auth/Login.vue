@@ -10,8 +10,11 @@
                 <input type="password" name="password" v-model="password" />
             </div>
             <button class="btn waves-effect deep-purple" type="submit" name="action">
-                <i class="material-icons right">trimite</i>
+              trimite
             </button>
+            <div class="bg-danger">
+              <small class="text-danger">{{feedback}}</small>
+            </div>
         </form>
     </div>
   </template>
@@ -27,26 +30,29 @@
       data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            feedback: ''
         }
       },
       methods: {
         async login() {
           const auth = getAuth();
-              signInWithEmailAndPassword(auth, this.email, this.password)
-              .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log(user)
-                // ...
-              })
-              .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-              });  
+          signInWithEmailAndPassword(auth, this.email, this.password)
+          .then((userCredential) => {
+            // Signed in 
+            this.$router.push({name: 'Profile'})
+          })
+          .catch((error) => {
+            // const errorCode = error.code;
+            this.feedback = error.message;
+            // ..
+          });  
         }
       }
     }
   </script>
-  
+<style>
+  .bg-danger {
+    color: red;
+  }
+</style>

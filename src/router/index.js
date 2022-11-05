@@ -4,6 +4,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Signup from '../components/auth/Signup.vue'
 import Login from '../components/auth/Login.vue'
+import ProfileViewVue from '@/views/ProfileView.vue'
+import ListView from '@/views/Courses/ListView.vue'
+import Curs from '@/views/Courses/Curs.vue'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes = [
   {
@@ -30,14 +34,32 @@ const routes = [
     component: JobDetailsView
   },
   {
-    path: '/Signup',
+    path: '/list',
+    name: 'ListView',
+    component: ListView
+  },
+  {
+    path: '/cont-nou',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/curs/:id',
+    name: 'Curs',
+    component: Curs
   },
   {
     path: '/Login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: ProfileViewVue,
+    meta: {
+      requiresAuth: true
+    }
   },
 ]
 
@@ -45,6 +67,19 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   mode: 'history',
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(rec => rec.meta.requiresAuth)) {
+    const auth = getAuth();
+    if (auth) {
+      next();
+    } else {
+      next({name: 'Login'});
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

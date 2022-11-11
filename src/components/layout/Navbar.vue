@@ -40,7 +40,7 @@ export default {
             if (auth.currentUser) {
                 this.user = auth.currentUser
             } else {
-                this.$router.push({name: 'Login'});
+                this.$router.push({name: 'ListView'});
             }
         });
     }

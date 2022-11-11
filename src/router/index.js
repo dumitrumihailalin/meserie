@@ -56,10 +56,7 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
-    component: ProfileViewVue,
-    meta: {
-      requiresAuth: true
-    }
+    component: ProfileViewVue
   },
 ]
 
@@ -75,7 +72,7 @@ router.beforeEach((to, from, next) => {
     if (auth) {
       next();
     } else {
-      next({name: 'Login'});
+      next({name: 'list'});
     }
   } else {
     next()

@@ -18,8 +18,8 @@
                         <label>Parola</label>
                         <input type="password" name="password" v-model="password" />
                     </div>
-                    <button class="btn waves-effect deep-purple" type="submit" name="action">
-                        <i class="material-icons right">actualizare</i>
+                    <button class="btn deep-purple" type="submit" name="action">
+                        actualizare
                     </button>
                     
                 </form>
@@ -81,6 +81,10 @@
   <style>
   .text-success {
     color: greenyellow;
+  }
+
+  .deep-purple {
+    color: #fff;
   }
 </style>
   

@@ -37,6 +37,7 @@
     background-color: #5e35b1 !important;
     width: 200px;
     padding: 5px;
+    color: #fff;
   }
 </style>
   

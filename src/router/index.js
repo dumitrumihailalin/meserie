@@ -66,17 +66,17 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(rec => rec.meta.requiresAuth)) {
-    const auth = getAuth();
-    if (auth) {
-      next();
-    } else {
-      next({name: 'list'});
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(rec => rec.meta.requiresAuth)) {
+//     const auth = getAuth();
+//     if (auth) {
+//       next();
+//     } else {
+//       next({name: 'list'});
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

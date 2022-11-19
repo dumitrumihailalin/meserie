@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <ul class="collection with-header">
             <li class="collection-header"><h4 class="bg-pirple">constructii</h4></li>
             <li class="collection-item"><div>sudor<router-link :to="{name: 'Curs', params: { id: 'sudor'}}" class="secondary-content"><i class="material-icons">send</i></router-link></div></li>
@@ -19,6 +19,10 @@
           <li class="collection-item"><div>bucatar<router-link :to="{name: 'Curs', params: { id: 'bucatar'}}" class="secondary-content"><i class="material-icons">send</i></router-link></div></li>
           <li class="collection-item"><div>barman<router-link :to="{name: 'Curs', params: { id: 'barman'}}" class="secondary-content"><i class="material-icons">send</i></router-link></div></li>
         </ul>
+        <ul class="collection with-header">
+          <li class="collection-header"><h4 class="bg-pirple">Altceva</h4></li>
+          <li class="collection-item"><div>Alt curs<router-link :to="{name: 'Curs', params: { id: 'altceva'}}" class="secondary-content"><i class="material-icons">send</i></router-link></div></li>
+        </ul>
     </div>
   </template>
   
@@ -35,7 +39,7 @@
 
   .bg-pirple {
     background-color: #5e35b1 !important;
-    width: 200px;
+    width: 250px;
     padding: 5px;
     color: #fff;
   }

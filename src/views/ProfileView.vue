@@ -18,6 +18,11 @@
                         <label>Parola</label>
                         <input type="password" name="password" v-model="password" />
                     </div>
+
+                    <div class="field">
+                        <label>Poza</label>
+                        <input type="file" @change="handleChange" />
+                    </div>
                     <button class="btn deep-purple" type="submit" name="action">
                         actualizare
                     </button>
@@ -33,7 +38,8 @@
   
   <script>
   import { getAuth, updateProfile, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
-  
+  import { getStorage, ref, uploadBytes } from "firebase/storage"
+
   export default {
     name: 'ProfileView',
     data() {
@@ -73,6 +79,21 @@
             // An error occurred
             // ...
             });
+
+        },
+        handleChange(e) {
+            const selected = e.target.files;
+            const auth = getAuth();
+            const types = ['image/png', 'image/jpeg'];
+            if (selected && types.includes(selected.type)) {
+                const storage = getStorage();
+                const storageRef = ref(storage, `covers/${auth.currentUser.uid}/${selected.value}`);
+
+                ref.put(storageRef).then((snapshot) => {
+                    console.log(snapshot)                    
+
+                });
+            }
 
         }
     }

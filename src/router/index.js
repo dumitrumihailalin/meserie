@@ -5,7 +5,6 @@ import HomeView from '../views/HomeView.vue'
 import Signup from '../components/auth/Signup.vue'
 import Login from '../components/auth/Login.vue'
 import ProfileViewVue from '@/views/ProfileView.vue'
-import ListView from '@/views/Courses/ListView.vue'
 import Curs from '@/views/Courses/Curs.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -33,23 +32,23 @@ const routes = [
     name: 'JobDetailsView',
     component: JobDetailsView
   },
-  {
-    path: '/list',
-    name: 'ListView',
-    component: ListView
-  },
+  // {
+  //   path: '/list',
+  //   name: 'ListView',
+  //   component: ListView
+  // },
   {
     path: '/cont-nou',
     name: 'Signup',
     component: Signup
   },
+  // {
+  //   path: '/curs/:id',
+  //   name: 'Curs',
+  //   component: Curs
+  // },
   {
-    path: '/curs/:id',
-    name: 'Curs',
-    component: Curs
-  },
-  {
-    path: '/Login',
+    path: '/login',
     name: 'Login',
     component: Login
   },
@@ -66,17 +65,17 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(rec => rec.meta.requiresAuth)) {
-//     const auth = getAuth();
-//     if (auth) {
-//       next();
-//     } else {
-//       next({name: 'list'});
-//     }
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(rec => rec.meta.requiresAuth)) {
+    const auth = getAuth();
+    if (auth) {
+      next();
+    } else {
+      next({name: 'Login'});
+    }
+  } else {
+    next()
+  }
+})
 
 export default router

@@ -8,17 +8,10 @@
                         <input type="email" name="email" v-model="email" />
                     </div>
                     <div class="field">
-                        <label>Nume</label>
-                        <input type="text" name="name" v-model="name" />
+                        <label>Parola</label>
+                        <input type="password" name="password" v-model="password" />
                     </div>
-                    <div class="field">
-                        <label>Telefon</label>
-                        <input type="text" name="phone" v-model="phone" />
-                    </div>
-                    <div class="field">
-                        <label>Judet</label>
-                        <input type="text" name="city" v-model="city" />
-                    </div>
+                    <router-link :to="{name: 'Recovery'}" class="btn btn-danger">Recuperare parola</router-link>
                     <button class="btn waves-effect deep-purple" type="submit" name="action">
                         trimite
                     </button>
@@ -30,27 +23,32 @@
   <script>
   import { db }  from '@/firebase/init'
   import { getFirestore } from 'firebase/firestore'
-  import { collection, getDocs, addDoc } from 'firebase/firestore'
+  import { collection, getDocs, addDoc, auth } from 'firebase/firestore'
+  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
     export default {
       name: 'Signup',
       data() {
         return {
             email: '',
-            phone: '',
-            city: '',
-            name: ''
+            password: '',
         }
       },
       methods: {
         async signup() {
-            let data = { email: this.email, phone: this.phone}
-            const docRef = await addDoc(collection(db, "users"), data);
-            console.log("Document written with ID: ", docRef.id);
-            this.email = '';
-            this.name = '';
-            this.phone = '';
-            this.city = '';
+            const auth = getAuth();
+            createUserWithEmailAndPassword(auth, this.email, this.password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.timeLog(user)
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
         }
       }
     }

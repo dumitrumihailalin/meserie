@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Signup from '../components/auth/Signup.vue'
 import Login from '../components/auth/Login.vue'
-import ProfileViewVue from '@/views/ProfileView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 import Recovery from '../components/auth/Recovery.vue'
 import Curs from '@/views/Courses/Curs.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -48,11 +48,6 @@ const routes = [
     name: 'Recovery',
     component: Recovery
   },
-  // {
-  //   path: '/curs/:id',
-  //   name: 'Curs',
-  //   component: Curs
-  // },
   {
     path: '/login',
     name: 'Login',
@@ -60,8 +55,8 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'Profile',
-    component: ProfileViewVue
+    name: 'ProfileView',
+    component: ProfileView
   },
 ]
 
@@ -71,17 +66,17 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(rec => rec.meta.requiresAuth)) {
-//     const auth = getAuth();
-//     if (auth) {
-//       next();
-//     } else {
-//       next({name: 'Login'});
-//     }
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(rec => rec.meta.requiresAuth)) {
+    const auth = getAuth();
+    if (auth) {
+      next();
+    } else {
+      next({name: 'Login'});
+    }
+  } else {
+    next()
+  }
+})
 
 export default router

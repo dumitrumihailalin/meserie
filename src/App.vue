@@ -1,7 +1,14 @@
 <template>
-  <div class="container">
-    <Navbar />
-    <router-view/>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <nav>
+        <div class="nav-bar">
+          <router-link to="/" class="btn btn-sm  text-dark">Home</router-link>
+          <router-link to="/about" class="btn btn-sm text-dark">About</router-link>
+        </div>
+      </nav> -->
+      <router-view/>
+    </div>
   </div>
 </template>
 <script>

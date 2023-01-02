@@ -41,7 +41,7 @@
           signInWithEmailAndPassword(auth, this.email, this.password)
           .then((userCredential) => {
             // Signed in 
-            this.$router.push({name: 'Profile'})
+            this.$router.push({name: 'home'})
           })
           .catch((error) => {
             // const errorCode = error.code;

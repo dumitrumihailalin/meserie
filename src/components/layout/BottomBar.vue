@@ -1,19 +1,8 @@
 <template>
-    <div class="top-bar bg-white mb-3 pt-3 pb-3">
+    <div class="bottom-bar bg-white mb-3 pt-3 pb-3">
       <div class="row">
-        <div class="col-md-2 text-center">
-          <div class="logo bg-golden">meserie. EU</div>
-        </div>
-        <div class="col-md-8">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          </form>
-        </div>
-        <div class="col-md-2"  v-if="user">
-          <a @click="logout" class="btn text-dark bg-golden">Deconectare</a>
-          <router-link to="/profile"  class="nav-link text-dark">
-            {{user.email}}
-          </router-link>
+        <div class="container-fluid text-center">
+          <p>www.meserie.eu</p>
         </div>
       </div>
     </div>
@@ -23,7 +12,7 @@
   import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
   export default {
-    name: 'TopBar',
+    name: 'BottomBar',
     data() {
       return {
         msg: 'publicitate',
@@ -58,7 +47,7 @@
     a { 
       text-decoration: none;
     }
-    .top-bar {  
+    .top-bar {
       box-shadow: 0 4px 2px -2px lightgoldenrodyellow;
     }
 

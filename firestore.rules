@@ -13,5 +13,8 @@ service cloud.firestore {
     match /candidates/{document=**} {
       allow read, write, update
     }
+    match /feeds/{document=**} {
+      allow read, write, update
+    }
   }
 }

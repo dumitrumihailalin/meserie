@@ -1,22 +1,26 @@
 <template>
-    <div class="signup container">
+    <div class="container-fluid text-center">
+        <h1>Meserie. EU - Conectare</h1>
         <div class="row">
-            <form @submit.prevent="signup">
-                <div class="col s6 m5">
-                    <div class="field">
+            <div class="col-md-6 mx-auto">
+                <form @submit.prevent="signup">
+                    <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="email" v-model="email" />
+                        <input type="email" class="form-control" name="email" v-model="email" />
                     </div>
-                    <div class="field">
+                    <div class="form-group">
                         <label>Parola</label>
-                        <input type="password" name="password" v-model="password" />
+                        <input type="password" class="form-control" name="password" v-model="password" />
                     </div>
-                    <router-link :to="{name: 'Recovery'}" class="btn btn-danger">Recuperare parola</router-link>
-                    <button class="btn waves-effect deep-purple" type="submit" name="action">
-                        trimite
-                    </button>
-                </div>
-            </form>
+                    <div class="form-group mt-3">
+                        <router-link :to="{name: 'Recovery'}" class="btn btn-outline-warning margin-right">Recuperare parola</router-link>
+                        <button class="btn btn-warning margin-right" type="submit" name="action">
+                            Trimite
+                        </button>
+                        <router-link :to="{name: 'Login'}" class="btn btn-outline-warning">Conectare</router-link>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
   </template>
@@ -41,8 +45,7 @@
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.timeLog(user)
-                // ...
+                this.$router.push({name: 'login'})
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -53,4 +56,8 @@
       }
     }
   </script>
-  
+  <style>
+  .margin-right {
+    margin-right: 5px;
+  }
+</style>

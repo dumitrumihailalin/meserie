@@ -1,22 +1,30 @@
 <template>
-    <div class="signup container">
-        <form @submit.prevent="login" class="card-panel">
-            <div class="field">
-                <label>Email</label>
-                <input type="email" name="email" v-model="email" />
+    <div class="container-fluid text-center">
+      <h1>Meserie. EU - Conectare</h1>
+      <div class="col-md-6 mx-auto">
+          <form @submit.prevent="login">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-control"  name="email" v-model="email" />
             </div>
-            <div class="field">
-                <label>Password</label>
-                <input type="password" name="password" v-model="password" />
+            <div class="form-group">
+                <label>Parola</label>
+                <input type="password" class="form-control" name="password" v-model="password" />
             </div>
-            <button class="btn waves-effect deep-purple" type="submit" name="action">
-              trimite
-            </button>
-            <router-link :to="{name: 'Recovery'}" class="btn btn-danger">Recuperare parola</router-link>
-            <div class="bg-danger">
-              <small class="text-danger">{{feedback}}</small>
+            <div class="form-group mt-3">
+              <button class="btn btn-warning ml-3" type="submit" name="action">
+                Conectare
+              </button>
+              </div>
+            <div class="form-group mt-3">
+              <router-link :to="{name: 'Recovery'}" class="btn btn-outline-warning margin-right">Recuperare parola</router-link>
+              <router-link :to="{name: 'Signup'}" class="btn btn-warning">Cont nou</router-link>
+              <div class="bg-danger">
+                <small class="text-danger">{{feedback}}</small>
+              </div>
             </div>
         </form>
+      </div>
     </div>
   </template>
   <script>
@@ -24,8 +32,7 @@
   import { getFirestore } from 'firebase/firestore'
   import { collection, getDocs } from 'firebase/firestore'
   import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-
+  import TopBar from '../layout/TopBar.vue';
     export default {
       name: 'Login',
       data() {
@@ -34,6 +41,9 @@
             password: '',
             feedback: ''
         }
+      },
+      components: {
+        TopBar
       },
       methods: {
         async login() {
@@ -53,7 +63,7 @@
     }
   </script>
 <style>
-  .bg-danger {
-    color: red;
+  .margin-right {
+    margin-right: 5px;
   }
 </style>

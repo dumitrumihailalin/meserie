@@ -22,5 +22,9 @@
   .bg-golden {
     background-color: lightgoldenrodyellow;
   }
+
+  .left-bar {
+    position: relative;
+  }
   </style>
   

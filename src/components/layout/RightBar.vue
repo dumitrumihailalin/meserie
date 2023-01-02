@@ -1,6 +1,6 @@
 <template>
     <div class="right-bar bg-golden">
-      <router-link to="/profil"  class="nav-link bg-golden text-dark">Publicitate</router-link>
+      <router-link to="/profile"  class="nav-link bg-golden text-dark">{{title}}</router-link>
     </div>
   </template>
   
@@ -9,7 +9,7 @@
     name: 'RightBar',
     data() {
       return {
-        msg: 'publicitate'
+        title: 'Sponsorizat'
       }
     }
   }

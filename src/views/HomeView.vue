@@ -15,6 +15,11 @@
       <RightBar />
     </div>
   </div>
+  <div class="row">
+      <div class="container-fluid">
+       <BottomBar />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,12 +29,14 @@ import LeftBar from '@/components/layout/LeftBar.vue'
 import RightBar from '@/components/layout/RightBar.vue'
 import Feed from '@/components/layout/Feed.vue'
 import TopBar from '@/components/layout/TopBar.vue'
+import BottomBar from '@/components/layout/BottomBar.vue'
 
 export default {
   name: 'HomeView',
   components: {
     HelloWorld,
     TopBar,
+    BottomBar,
     LeftBar,
     RightBar,
     Feed

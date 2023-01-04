@@ -2,7 +2,12 @@
     <div class="top-bar bg-white mb-3 pt-3 pb-3">
       <div class="row">
         <div class="col-md-2 text-center">
-          <div class="logo bg-golden">meserie. EU</div>
+            <router-link to="/" class="text-warning">
+              <div class="btn text-warning logo">
+                meserie. EU
+              </div>
+            </router-link>
+          <p><small class="text-warning">bratara de aur</small></p>
         </div>
         <div class="col-md-8">
           <form class="form-inline">
@@ -10,10 +15,8 @@
           </form>
         </div>
         <div class="col-md-2"  v-if="user">
-          <a @click="logout" class="btn text-dark bg-golden">Deconectare</a>
-          <router-link to="/profile"  class="nav-link text-dark">
-            {{user.email}}
-          </router-link>
+          <a @click="logout" class="btn text-warning logo">Deconectare</a>
+          <router-link to="/profile"  class="nav-link bg-golden text-dark mt-1">Profil</router-link>
         </div>
       </div>
     </div>
@@ -32,12 +35,12 @@
     },
     methods: {
       async logout() {
-            const auth = getAuth();
-            signOut(auth).then(() => {
-                this.$router.push({name: 'Login'})
-            }).catch((error) => {
-              console.log(error)
-            });
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          this.$router.push({name: 'Login'})
+        }).catch((error) => {
+          // An error happened.
+        });
         }
     },
     created() {

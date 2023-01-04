@@ -1,44 +1,58 @@
 <template>
-    <div class="signup container">
-        <div class="row">
-            <div class="card" v-if="feedback">
-                <small class="text-danger">{{feedback}}</small>
+    <div class="row">
+      <div class="container-fluid">
+       <TopBar />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+       <LeftBar />
+      </div>
+      <div class="col-md-8">
+        <form @submit.prevent="update">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label>Nume</label>
+                  <input type="text" class="form-control" name="displayName" v-model="displayName">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" v-model="email">
+              </div>
+              <div class="form-group">
+                  <label>Parola</label>
+                  <input type="password" class="form-control" name="password" v-model="password">
+              </div>              
             </div>
-            <div class="col s6 m5">
-                <form @submit.prevent="update" class="card-panel">
-                    <div class="field">
-                        <label>Nume</label>
-                        <input type="text" name="displayName" v-model="displayName" />
-                    </div>
-                    <div class="field">
-                        <label>Email</label>
-                        <input type="email" name="email" v-model="email" />
-                    </div>
-                    <div class="field">
-                        <label>Parola</label>
-                        <input type="password" name="password" v-model="password" />
-                    </div>
-
-                    <div class="field">
-                        <label>Poza</label>
-                        <input type="file" @change="handleChange" />
-                    </div>
-                    <button class="btn deep-purple" type="submit" name="action">
-                        actualizare
-                    </button>
-                    
-                </form>
+            <div class="col-md-4">
+              <div class="form-group mt-3">
+                  <input type="file" />
+              </div>
             </div>
-            <div class="col s6 m5 p5">
-                <img :src="photoURL" width="250" height="250"/>
-            </div> 
-        </div>
+          </div>
+          <div class="form-group mt-3">
+              <button class="btn btn-outline-warning">Actualizare</button>
+          </div>
+          </form>
+      </div>
+      <div class="col-md-2">
+        <RightBar />
+      </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid">
+         <BottomBar />
+      </div>
     </div>
   </template>
   
   <script>
   import { getAuth, updateProfile, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
   import { getStorage, ref, uploadBytes } from "firebase/storage"
+  import TopBar from '@/components/layout/TopBar.vue'
+  import LeftBar from '@/components/layout/LeftBar.vue'
+  import RightBar from '@/components/layout/RightBar.vue'
 
   export default {
     name: 'ProfileView',
@@ -50,6 +64,11 @@
             feedback: '',
             photoURL: ''
         }
+    },
+    components: {
+        TopBar,
+        LeftBar,
+        RightBar
     },
     mounted() {
         const auth = getAuth();

@@ -9,6 +9,10 @@
                         <input type="email" class="form-control" name="email" v-model="email" />
                     </div>
                     <div class="form-group">
+                        <label>Nume</label>
+                        <input type="text" class="form-control" name="displayName" v-model="displayName" />
+                    </div>
+                    <div class="form-group">
                         <label>Parola</label>
                         <input type="password" class="form-control" name="password" v-model="password" />
                     </div>
@@ -28,7 +32,7 @@
   import { db }  from '@/firebase/init'
   import { getFirestore } from 'firebase/firestore'
   import { collection, getDocs, addDoc, auth } from 'firebase/firestore'
-  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
 
     export default {
       name: 'Signup',
@@ -36,17 +40,25 @@
         return {
             email: '',
             password: '',
+            displayName: ''
         }
       },
       methods: {
         async signup() {
             const auth = getAuth();
-            createUserWithEmailAndPassword(auth, this.email, this.password)
+
+            createUserWithEmailAndPassword(auth, this.email, this.password, this.displayName)
             .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
-                this.$router.push({name: 'login'})
-            })
+                    updateProfile(auth.currentUser, {
+                        displayName: this.displayName
+                    }).then((res) => {
+                        this.feedback = "Actualizat cu succes"
+                    }).catch((error) => {
+                    // An error occurred
+                    // ...
+                    });
+                })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;

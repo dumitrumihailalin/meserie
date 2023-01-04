@@ -1,6 +1,6 @@
 <template>
     <div class="right-bar bg-golden">
-      <router-link to="/profile"  class="nav-link bg-golden text-dark">{{title}}</router-link>
+      <h4 href="#" class="nav-link bg-golden text-dark">{{title}}</h4>
     </div>
   </template>
   

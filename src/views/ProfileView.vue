@@ -1,7 +1,7 @@
 <template>
     <div class="row">
       <div class="container-fluid">
-       <TopBar />
+        <TopBar />
       </div>
     </div>
     <div class="row">
@@ -14,15 +14,15 @@
             <div class="col-md-4">
               <div class="form-group">
                   <label>Nume</label>
-                  <input type="text" class="form-control" name="displayName" v-model="displayName">
+                  <input type="text" class="form-control" v-model="displayName">
               </div>
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" class="form-control" name="email" v-model="email">
+                <input type="email" class="form-control" v-model="email">
               </div>
               <div class="form-group">
                   <label>Parola</label>
-                  <input type="password" class="form-control" name="password" v-model="password">
+                  <input type="password" class="form-control"  v-model="password">
               </div>              
             </div>
             <div class="col-md-4">
@@ -53,32 +53,35 @@
   import TopBar from '@/components/layout/TopBar.vue'
   import LeftBar from '@/components/layout/LeftBar.vue'
   import RightBar from '@/components/layout/RightBar.vue'
+  import BottomBar from '@/components/layout/BottomBar.vue'
 
   export default {
     name: 'ProfileView',
     data() {
-        return {
-            password: '',
-            displayName: '',
-            email: '',
-            feedback: '',
-            photoURL: ''
-        }
+      return {
+        password: '',
+        displayName: '',
+        email: '',
+        feedback: '',
+        photoURL: '',
+      }
     },
     components: {
         TopBar,
         LeftBar,
-        RightBar
+        RightBar,
+        BottomBar
     },
-    mounted() {
-        const auth = getAuth();
+    created() {
+
+      const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
         if (user) {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
-            const uid = user.uid;
-            this.displayName = user.displayName
-            this.photoURL = user.photoURL
+            this.email = user.email;
+            this.displayName = user.displayName;
+            // this.photoURL = user.photoURL;
             // ...
         } else {
             // User is signed out

@@ -14,8 +14,8 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           </form>
         </div>
-        <div class="col-md-2"  v-if="user">
-          <a @click="logout" class="btn text-warning logo">Deconectare</a>
+        <div class="col-md-2">
+          <a @click="logout" class="btn text-warning logo">Deconectare {{displayName}}</a>
           <router-link to="/profile"  class="nav-link bg-golden text-dark mt-1">Profil</router-link>
         </div>
       </div>
@@ -30,7 +30,7 @@
     data() {
       return {
         msg: 'publicitate',
-        user: null
+        displayName: null
       }
     },
     methods: {
@@ -44,13 +44,18 @@
         }
     },
     created() {
-        const auth = getAuth();
-        onAuthStateChanged(auth, () => {
-            if (auth.currentUser) {
-                this.user = auth.currentUser
-            } else {
-                this.$router.push({name: 'Login'});
-            }
+      const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            this.displayName = user.displayName;
+            // this.photoURL = user.photoURL;
+            // ...
+        } else {
+            // User is signed out
+            // ...
+        }
         });
     }
   }

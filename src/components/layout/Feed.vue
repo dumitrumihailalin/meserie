@@ -19,7 +19,7 @@
       <div class="bg-white p-1">
         <div class="row">
           <div class="col-md-3 text-center">
-            <span class="text-warning" @click="toggleDark(feed)">Apreciaza</span>
+            <i :class="[feed.likes.includes(user) ? danger : warning]" class="fa fa-thin fa-heart" @click="toggleDark(feed)"></i>
           </div>
           <div class="col-md-3 text-center">
             Trimite E-Mail
@@ -28,15 +28,10 @@
             Copiaza postare
           </div>
           <div class="col-md-3 text-center">
-          <p>Aprecieri  
-            {{ Object.keys(feed.likes).length  }}
-          </p> 
-        </div>
+            Aprecieri {{ feed.likes.length }}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <!-- <a @click="loadMore">{{loadMore}}</a> -->
     </div>
   </div>
   </template>
@@ -56,52 +51,51 @@ export default {
       return {
         msg: 'feed content',
         feeds: [],
+        isActive: true,
         content: null,
-        user: null,
-        count: 10,
         loading: false,
-        likes: []
+        user: "",
+        likes: [],
+        warning: 'text-warning',
+        danger: 'text-danger'
       }
     },
-    created() {
-      this.getFeed();
+    async created() {
+      this.loading = true
+
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        this.user = user.uid;
+      });
+      onSnapshot(collection(db, "feeds"), (querySnapshot) => {
+        this.feeds = querySnapshot.docs.map( doc => ({...doc.data(), id: doc.id}))
+      })
+      this.loading = false;
     },
     methods: {
-      async getFeed() {
-        this.loading = true
-        const q = query(collection(db, "feeds"), orderBy("createdAt"), limit(this.count));
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach( doc  => {
-            this.feeds.push({...doc.data(), id: doc.id});
-          });
-        this.loading = false;
-      },
       async toggleDark(feed) {
         const auth = getAuth();
-        const db = getFirestore();
         const docRef = doc(db, "feeds", feed.id);
-       
+        
         await updateDoc(docRef, {
           likes: feed.likes.includes(auth.currentUser.uid) ? 
-                            arrayRemove(auth.currentUser.uid):
-                            arrayUnion(auth.currentUser.uid)
+            arrayRemove(auth.currentUser.uid):
+            arrayUnion(auth.currentUser.uid)
         });
-        this.feeds = []
-        this.getFeed();
+        this.isActive = true
       },
       async send() {
         const auth = getAuth();
 
-        const feed = { 
+        let feed = { 
           'content': this.content, 
           'user': auth.currentUser.displayName,
           'likes': [],
-          'createdAt': Date.now()
+          'createdAt': new Date().toLocaleString()
         };
         
         await addDoc(collection(db, "feeds"), feed);
         this.content = ''
-        this.feeds.push(feed)
       }
     }
   }

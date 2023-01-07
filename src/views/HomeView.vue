@@ -30,16 +30,9 @@ import RightBar from '@/components/layout/RightBar.vue'
 import Feed from '@/components/layout/Feed.vue'
 import TopBar from '@/components/layout/TopBar.vue'
 import BottomBar from '@/components/layout/BottomBar.vue'
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 export default {
   name: 'HomeView',
-  data() {
-    return {
-    }
-  },
-  created() {
-  },
   components: {
     HelloWorld,
     TopBar,

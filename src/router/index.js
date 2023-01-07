@@ -5,6 +5,7 @@ import HomeView from '../views/HomeView.vue'
 import Signup from '../components/auth/Signup.vue'
 import Login from '../components/auth/Login.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import Post from '@/views/Post.vue'
 import Recovery from '../components/auth/Recovery.vue'
 import Curs from '@/views/Courses/Curs.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -58,6 +59,11 @@ const routes = [
     name: 'ProfileView',
     component: ProfileView
   },
+  {
+    path: '/post',
+    name: 'Post',
+    component: Post
+  }
 ]
 
 const router = createRouter({

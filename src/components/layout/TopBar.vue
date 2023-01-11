@@ -11,11 +11,11 @@
         </div>
         <div class="col-md-8">
           <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Cautare" aria-label="Search">
           </form>
         </div>
         <div class="col-md-2">
-          <a @click="logout" class="btn text-warning logo">Deconectare {{displayName}}</a>
+          <a @click="logout" class="btn text-warning logo" v-if="displayName">Deconectare {{displayName}}</a>
           <router-link to="/profile"  class="nav-link bg-golden text-dark mt-1">Profil</router-link>
         </div>
       </div>
@@ -24,13 +24,20 @@
   
   <script>
   import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+  import { query, where, orderBy, startAt, limit, doc, setDoc, createdAt, firestore, 
+    collection, getDoc, getFirestore, updateDoc, getDocs, addDoc, 
+    docChanges, auth, onSnapshot, snapshot,  getCountFromServer,
+    arrayUnion, arrayRemove } from 'firebase/firestore'
+  import { db }  from '@/firebase/init';
 
   export default {
     name: 'TopBar',
     data() {
       return {
         msg: 'publicitate',
-        displayName: null
+        notifications: 0, 
+        user: '',
+        displayName: ''
       }
     },
     methods: {
@@ -43,20 +50,12 @@
         });
         }
     },
-    created() {
-      const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            this.displayName = user.displayName;
-            // this.photoURL = user.photoURL;
-            // ...
-        } else {
-            // User is signed out
-            // ...
-        }
-        });
+    async created() {
+      const auth = await getAuth();
+
+      await onAuthStateChanged(auth, () => {
+        this.displayName = auth.currentUser.displayName
+      });
     }
   }
   </script>

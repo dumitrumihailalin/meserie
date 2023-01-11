@@ -46,9 +46,7 @@ export default {
     },
     created() {
         this.curs = this.$route.params.id
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
-        .then(response => response.json())
-        .then(json => console.log(json))
+
     },
     methods: {
         async signup() {

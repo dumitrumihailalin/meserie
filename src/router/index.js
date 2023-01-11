@@ -2,10 +2,11 @@ import JobsView from '@/views/jobs/JobsView.vue'
 import JobDetailsView from '@/views/jobs/JobDetailsView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import OfferView from '../views/OfferView.vue'
 import Signup from '../components/auth/Signup.vue'
 import Login from '../components/auth/Login.vue'
 import ProfileView from '@/views/ProfileView.vue'
-import Post from '@/views/Post.vue'
+import Post from '@/views/OfferView.vue'
 import Recovery from '../components/auth/Recovery.vue'
 import Curs from '@/views/Courses/Curs.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -34,6 +35,11 @@ const routes = [
     name: 'JobDetailsView',
     component: JobDetailsView
   },
+  {
+    path: '/offer/:id',
+    name: 'offer',
+    component: OfferView
+  },
   // {
   //   path: '/list',
   //   name: 'ListView',
@@ -60,9 +66,9 @@ const routes = [
     component: ProfileView
   },
   {
-    path: '/post',
-    name: 'Post',
-    component: Post
+    path: '/cursuri',
+    name: 'Cursuri',
+    component: Curs
   }
 ]
 
